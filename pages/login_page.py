@@ -1,6 +1,8 @@
 from components.authentication.login_form_component import LoginFormComponent
 from pages.base_page import BasePage
 from playwright.sync_api import Page,expect
+from elements.button import Button
+from elements.link import Link
 
 class LoginPage(BasePage):
     def __init__(self,page:Page):
@@ -8,8 +10,8 @@ class LoginPage(BasePage):
 
         self.login_form = LoginFormComponent(page)
 
-        self.login_button = page.get_by_test_id('login-page-login-button')
-        self.registration_link = page.get_by_test_id('login-page-registration-link')
+        self.login_button = Button(page,'login-page-login-button', 'Login')
+        self.registration_link = Link(page,'login-page-registration-link', 'Link')
 
     def click_login_button(self):
         self.login_button.click()

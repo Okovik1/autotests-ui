@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from elements.text import Text
 
 from components.base_component import BaseComponent
 
@@ -9,7 +10,7 @@ class LoginFormComponent(BaseComponent):
 
         self.email_input = page.get_by_test_id('login-form-email-input').locator('input')
         self.password_input = page.get_by_test_id('login-form-password-input').locator('input')
-        self.wrong_email_or_password_alert = page.get_by_test_id('login-page-wrong-email-or-password-alert')
+        self.wrong_email_or_password_alert = Text(page,'login-page-wrong-email-or-password-alert','Wrong email or password')
 
 
     def fill(self, email, password):
@@ -19,5 +20,7 @@ class LoginFormComponent(BaseComponent):
         expect(self.password_input).to_have_value(password)
 
     def check_visible(self):
-        expect(self.wrong_email_or_password_alert).to_be_visible()
-        expect(self.wrong_email_or_password_alert).to_have_text("Wrong email or password")
+        self.wrong_email_or_password_alert.check_visible()
+        self.wrong_email_or_password_alert.check_have_text("Wrong email or password")
+
+
