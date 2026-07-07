@@ -4,6 +4,7 @@ from playwright.sync_api import Page,expect
 from elements.button import Button
 from elements.link import Link
 import re
+import allure
 
 class LoginPage(BasePage):
     def __init__(self,page:Page):
